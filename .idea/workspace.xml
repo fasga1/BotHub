@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,12 +231,29 @@
       <option name="project" value="LOCAL" />
       <updated>1760621902890</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <option name="closed" value="true" />
+      <created>1760627322122</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760627322122</updated>
+    </task>
+    <task id="LOCAL-00008" summary="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <option name="closed" value="true" />
+      <created>1760627346217</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1760627346217</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="WB_congratulations_bot" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token." />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token." />
   </component>
 </project>
