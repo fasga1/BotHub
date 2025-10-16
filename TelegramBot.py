@@ -14,7 +14,7 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
-    print("Бот запущен...")
+    print("Первоначальная версия бота")
     app.run_polling()
 
 if __name__ == '__main__':
