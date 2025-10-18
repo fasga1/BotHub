@@ -1,28 +1,39 @@
-from telegram.ext import Application, CommandHandler, MessageHandler, filters
-from telegram import ReplyKeyboardMarkup, KeyboardButton
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    ConversationHandler,
+    MessageHandler,
+    filters
+)
 import os
 from dotenv import load_dotenv
+from keyboards import KeyboardManager
+from states import LOGIN, PASSWORD
 
 load_dotenv()
-
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-Button_text = "Зарегистрироваться"
+user_data = {}
 
 async def start(update, context):
-    button = KeyboardButton(Button_text)
-    keyboard = [[button]]
-    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=False)
-
+    reply_markup = KeyboardManager.get_register_button()  # 👈 Вызываем метод из класса
     await update.message.reply_text(
-    "Привет!\nВы запустили WB_Congratulations_bot\n\nВот инструкция по пользованию ботом для вас:\n\nПервым делом, для работы в боте вам необходимо зарегистрироваться используя вашу корпаративную почту и выданый вам пароль, для этого нажмите на кнопку 'Зарегистрироваться'",
+        "Привет!\nВы запустили WB_Congratulations_bot\n\n"
+        "Вот инструкция по пользованию ботом для вас:\n\n"
+        "Первым делом, для работы в боте вам необходимо зарегистрироваться, "
+        "используя вашу корпоративную почту и выданный вам пароль. "
+        "Для этого нажмите на кнопку 'Зарегистрироваться'",
         reply_markup=reply_markup
     )
 
 async def handle_button(update, context):
     user_text = update.message.text
-    if user_text == Button_text:
-        await update.message.reply_text("Введите ваш ЛОГИН и ПАРОЛЬ в формате:\n ЛОГИН:{ваша почта}\n ПАРОЛЬ:{ваш пароль}")
+    if user_text == KeyboardManager.REGISTER:  # 👈 Сравниваем с константой из класса
+        await update.message.reply_text(
+            "Введите ваш ЛОГИН и ПАРОЛЬ в формате:\n"
+            "ЛОГИН:{ваша почта}\n"
+            "ПАРОЛЬ:{ваш пароль}"
+        )
     else:
         await update.message.reply_text("Я понимаю только кнопку!")
 

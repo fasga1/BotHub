@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
-      <change afterPath="$PROJECT_DIR$/src/Python_code/keyboards.py" afterDir="false" />
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch created a separate .py file in which I added a class for creating buttons.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,13 +255,22 @@
       <option name="project" value="LOCAL" />
       <updated>1760632553063</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="develop/Potap_branch created a separate .py file in which I added a class for creating buttons.">
+      <option name="closed" value="true" />
+      <created>1760791628498</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760791628498</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="WB_congratulations_bot" />
     <MESSAGE value="Initial commit" />
     <MESSAGE value="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token." />
-    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token." />
+    <MESSAGE value="develop/Potap_branch created a separate .py file in which I added a class for creating buttons." />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch created a separate .py file in which I added a class for creating buttons." />
   </component>
 </project>
