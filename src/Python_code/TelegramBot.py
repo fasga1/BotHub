@@ -9,6 +9,7 @@ import os
 from dotenv import load_dotenv
 from keyboards import KeyboardManager
 from states import LOGIN, PASSWORD
+import re
 
 load_dotenv()
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -34,8 +35,25 @@ async def register_start(update, context):
     )
     return LOGIN
 
+CORPORATE_DOMAIN = "st.ithub.ru"  # ← измените на ваш домен
+
 async def get_login(update, context):
     user_login = update.message.text.strip()
+
+    if not re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", user_login):
+        await update.message.reply_text(
+            "Неверный формат email. Попробуйте снова:\n\n"
+            "Пример: ivanov@st.ithub.ru"
+        )
+        return LOGIN
+
+    if not user_login.endswith(f"@{CORPORATE_DOMAIN}"):
+        await update.message.reply_text(
+            f"Почта должна быть корпоративной (@{CORPORATE_DOMAIN}).\n"
+            "Попробуйте снова:"
+        )
+        return LOGIN
+
     context.user_data['login'] = user_login
     await update.message.reply_text("Введите ваш пароль:")
     return PASSWORD
@@ -43,7 +61,6 @@ async def get_login(update, context):
 async def get_password(update, context):
     user_password = update.message.text.strip()
     context.user_data['password'] = user_password
-    # Здесь будет проверка по шаблонам
     await update.message.reply_text("✅ Доступ открыт!")
 
     context.user_data.clear()
