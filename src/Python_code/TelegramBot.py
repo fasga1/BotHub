@@ -10,9 +10,20 @@ from dotenv import load_dotenv
 from keyboards import KeyboardManager
 from states import LOGIN, PASSWORD
 import re
-
+from telegram import Update
+from telegram.ext import ContextTypes, CallbackQueryHandler
 load_dotenv()
+
+
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+
+EMPLOYEES = [
+    "Анна Петрова",
+    "Иван Смирнов",
+    "Мария Козлова",
+    "Алексей Иванов",
+    "Екатерина Соколова"
+]
 
 user_data = {}
 
@@ -61,11 +72,26 @@ async def get_login(update, context):
 async def get_password(update, context):
     user_password = update.message.text.strip()
     context.user_data['password'] = user_password
-    await update.message.reply_text("✅ Доступ открыт!")
-
-    context.user_data.clear()
+    await update.message.reply_text(
+        "Доступ открыт!\n"
+        "Сегодня праздники у нескольких сотрудников.\n"
+        "Выберите сотрудника, которого хотите поздравить:",
+        reply_markup=KeyboardManager.get_employee_inline_keyboard(EMPLOYEES)
+    )
 
     return ConversationHandler.END
+
+async def employee_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    selected_name = query.data.replace("select_", "")
+
+    await query.edit_message_text(
+        text=f"Вы выбрали сотрудника: *{selected_name}*\n\n"
+             "Поздравление отправлено! 🎉",
+        parse_mode="Markdown"
+    )
 
 async def cancel(update, context):
     await update.message.reply_text("Регистрация отменена.")
@@ -86,6 +112,7 @@ def main():
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(conv_handler)
+    app.add_handler(CallbackQueryHandler(employee_selected))  # ← новая строка
 
     print("Бот запущен!")
     app.run_polling()
