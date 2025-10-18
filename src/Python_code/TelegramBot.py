@@ -25,23 +25,50 @@ async def start(update, context):
         "Для этого нажмите на кнопку 'Зарегистрироваться'",
         reply_markup=reply_markup
     )
+    return None
 
-async def handle_button(update, context):
-    user_text = update.message.text
-    if user_text == KeyboardManager.REGISTER:  # 👈 Сравниваем с константой из класса
-        await update.message.reply_text(
-            "Введите ваш ЛОГИН и ПАРОЛЬ в формате:\n"
-            "ЛОГИН:{ваша почта}\n"
-            "ПАРОЛЬ:{ваш пароль}"
-        )
-    else:
-        await update.message.reply_text("Я понимаю только кнопку!")
+async def register_start(update, context):
+    await update.message.reply_text(
+        "Введите ваш логин (корпоративная почта):",
+        reply_markup=KeyboardManager.remove_keyboard()  # ← убираем кнопки
+    )
+    return LOGIN
+
+async def get_login(update, context):
+    user_login = update.message.text.strip()
+    context.user_data['login'] = user_login
+    await update.message.reply_text("Введите ваш пароль:")
+    return PASSWORD
+
+async def get_password(update, context):
+    user_password = update.message.text.strip()
+    context.user_data['password'] = user_password
+    # Здесь будет проверка по шаблонам
+    await update.message.reply_text("✅ Доступ открыт!")
+
+    context.user_data.clear()
+
+    return ConversationHandler.END
+
+async def cancel(update, context):
+    await update.message.reply_text("Регистрация отменена.")
+    return ConversationHandler.END
+
 
 def main():
     app = Application.builder().token(TOKEN).build()
 
+    conv_handler = ConversationHandler(
+        entry_points=[MessageHandler(filters.Text([KeyboardManager.REGISTER]), register_start)],
+        states={
+            LOGIN: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_login)],
+            PASSWORD: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_password)],
+        },
+        fallbacks=[CommandHandler("cancel", cancel)],
+    )
+
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_button))
+    app.add_handler(conv_handler)
 
     print("Бот запущен!")
     app.run_polling()

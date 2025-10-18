@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch created a separate .py file in which I added a class for creating buttons.">
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch &#10;Created a states.py file to store states">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Python_code/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/keyboards.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +264,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760791628498</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="develop/Potap_branch &#10;Created a states.py file to store states">
+      <option name="closed" value="true" />
+      <created>1760793474414</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760793474414</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -271,6 +280,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token." />
     <MESSAGE value="develop/Potap_branch created a separate .py file in which I added a class for creating buttons." />
-    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch created a separate .py file in which I added a class for creating buttons." />
+    <MESSAGE value="develop/Potap_branch &#10;Created a states.py file to store states" />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch &#10;Created a states.py file to store states" />
   </component>
 </project>

@@ -1,4 +1,4 @@
-from telegram import ReplyKeyboardMarkup, KeyboardButton
+from telegram import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 class KeyboardManager:
     REGISTER = "Зарегистрироваться"
@@ -6,4 +6,8 @@ class KeyboardManager:
     @staticmethod
     def get_register_button():
         button = KeyboardButton(KeyboardManager.REGISTER)
-        return ReplyKeyboardMarkup([[button]], resize_keyboard=True, one_time_keyboard=False)
+        return ReplyKeyboardMarkup([[button]], resize_keyboard=True)
+
+    @staticmethod
+    def remove_keyboard():
+        return ReplyKeyboardRemove()
