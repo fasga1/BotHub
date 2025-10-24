@@ -12,18 +12,11 @@ from states import LOGIN, PASSWORD
 import re
 from telegram import Update
 from telegram.ext import ContextTypes, CallbackQueryHandler
+from database import get_all_employees
 load_dotenv()
 
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-
-EMPLOYEES = [
-    "Анна Петрова",
-    "Иван Смирнов",
-    "Мария Козлова",
-    "Алексей Иванов",
-    "Екатерина Соколова"
-]
 
 user_data = {}
 
@@ -72,25 +65,26 @@ async def get_login(update, context):
 async def get_password(update, context):
     user_password = update.message.text.strip()
     context.user_data['password'] = user_password
+    employees = get_all_employees()
     await update.message.reply_text(
         "Доступ открыт!\n"
         "Сегодня праздники у нескольких сотрудников.\n"
         "Выберите сотрудника, которого хотите поздравить:",
-        reply_markup=KeyboardManager.get_employee_inline_keyboard(EMPLOYEES)
+        reply_markup=KeyboardManager.get_employee_inline_keyboard(employees)
     )
-
     return ConversationHandler.END
 
 async def show_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    employees = get_all_employees()
     if update.callback_query:
         await update.callback_query.edit_message_text(
             text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard(EMPLOYEES)
+            reply_markup=KeyboardManager.get_employee_inline_keyboard(employees)
         )
     else:
         await update.message.reply_text(
             text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard(EMPLOYEES)
+            reply_markup=KeyboardManager.get_employee_inline_keyboard(employees)
         )
 
 async def back_to_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
