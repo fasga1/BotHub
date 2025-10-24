@@ -89,13 +89,52 @@ async def employee_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await query.edit_message_text(
         text=f"Вы выбрали сотрудника: *{selected_name}*\n\n"
-             "Поздравление отправлено! 🎉",
-        parse_mode="Markdown"
+             "Выберите стиль поздравления:",
+        parse_mode="Markdown",
+        reply_markup=KeyboardManager.get_style_inline_keyboard(selected_name)
     )
 
 async def cancel(update, context):
     await update.message.reply_text("Регистрация отменена.")
     return ConversationHandler.END
+
+async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    parts = query.data.split("_", 2)
+    if len(parts) < 3:
+        await query.edit_message_text("Ошибка выбора стиля.")
+        return
+
+    style_type = parts[1]
+    employee_name = parts[2]
+
+    if style_type == "official":
+        message = (
+            f"Уважаемый(ая) {employee_name}!\n\n"
+            "От имени коллектива примите наши искренние поздравления!\n"
+            "Желаем крепкого здоровья, профессиональных успехов и благополучия!"
+        )
+    elif style_type == "business":
+        message = (
+            f"{employee_name},\n\n"
+            "Поздравляем с профессиональным достижением!\n"
+            "Ваш вклад в развитие компании высоко ценится. "
+            "Успехов в реализации новых проектов!"
+        )
+    elif style_type == "friendly":
+        message = (
+            f"Привет, {employee_name}! 🎉\n\n"
+            "С днём рождения! Желаю море позитива, "
+            "крутых идей и чтобы все задачи решались сами! 😎"
+        )
+    else:
+        message = "Неизвестный стиль."
+
+    await query.edit_message_text(
+        text=message
+    )
 
 
 def main():
@@ -112,7 +151,8 @@ def main():
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(conv_handler)
-    app.add_handler(CallbackQueryHandler(employee_selected))  # ← новая строка
+    app.add_handler(CallbackQueryHandler(employee_selected, pattern=r"^select_"))
+    app.add_handler(CallbackQueryHandler(style_selected, pattern=r"^style_"))
 
     print("Бот запущен!")
     app.run_polling()
