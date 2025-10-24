@@ -1,1 +1,2 @@
 LOGIN, PASSWORD = range(2)
+FEEDBACK_EDIT = 3

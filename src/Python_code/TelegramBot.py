@@ -127,6 +127,9 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     style_type = parts[1]
     employee_name = parts[2]
 
+    context.user_data['current_employee'] = employee_name
+    context.user_data['current_style'] = style_type
+
     if style_type == "official":
         message = (
             f"Уважаемый(ая) {employee_name}!\n\n"
@@ -149,10 +152,53 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         message = "Неизвестный стиль."
 
+    context.user_data['current_message'] = message
+
     await query.edit_message_text(
-        text=message
+        text=message,
+        reply_markup=KeyboardManager.get_feedback_inline_keyboard(employee_name)
     )
 
+async def feedback_like(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    await query.edit_message_text("Отлично! Рады, что вам понравилось!")
+
+async def feedback_rewrite(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    employee_name = query.data.split("_", 2)[2]
+
+    await query.edit_message_text(
+        text=f"Вы выбрали сотрудника: *{employee_name}*\n\nВыберите стиль поздравления:",
+        parse_mode="Markdown",
+        reply_markup=KeyboardManager.get_style_inline_keyboard(employee_name)
+    )
+
+async def feedback_edit_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    employee_name = query.data.split("_", 2)[2]
+
+    context.user_data['awaiting_edit'] = True
+    context.user_data['current_employee'] = employee_name
+
+    await query.edit_message_text(
+        "Пожалуйста, введите вашу версию поздравления:"
+    )
+
+async def handle_edit_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if context.user_data.get('awaiting_edit'):
+        edited_text = update.message.text.strip()
+        employee_name = context.user_data.get('current_employee', 'сотрудник')
+
+        context.user_data['awaiting_edit'] = False
+
+        await update.message.reply_text(
+            f"Ваше поздравление для {employee_name}:\n\n{edited_text}\n\n"
+            "Отправлено! Спасибо за правки!"
+        )
+        return
 
 def main():
     app = Application.builder().token(TOKEN).build()
@@ -170,7 +216,12 @@ def main():
     app.add_handler(conv_handler)
     app.add_handler(CallbackQueryHandler(employee_selected, pattern=r"^select_"))
     app.add_handler(CallbackQueryHandler(style_selected, pattern=r"^style_"))
-    app.add_handler(CallbackQueryHandler(back_to_employees, pattern=r"^back_to_employees"))  # ← добавлено
+    app.add_handler(CallbackQueryHandler(back_to_employees, pattern=r"^back_to_employees"))
+    app.add_handler(CallbackQueryHandler(feedback_like, pattern=r"^feedback_like_"))
+    app.add_handler(CallbackQueryHandler(feedback_rewrite, pattern=r"^feedback_rewrite_"))
+    app.add_handler(CallbackQueryHandler(feedback_edit_start, pattern=r"^feedback_edit_"))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_edit_text))
+
 
     print("Бот запущен!")
     app.run_polling()
