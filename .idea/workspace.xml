@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added a list of employees and the ability to select">
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added a choice of greeting styles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Python_code/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/keyboards.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -295,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760819110656</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="develop/Potap_branch Added a choice of greeting styles">
+      <option name="closed" value="true" />
+      <created>1761305322369</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1761305322369</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -307,6 +316,7 @@
     <MESSAGE value="develop/Potap_branch Added a dialog to the bot and the ability to register" />
     <MESSAGE value="develop/Potap_branch Added login template checking" />
     <MESSAGE value="develop/Potap_branch Added a list of employees and the ability to select" />
-    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added a list of employees and the ability to select" />
+    <MESSAGE value="develop/Potap_branch Added a choice of greeting styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added a choice of greeting styles" />
   </component>
 </project>

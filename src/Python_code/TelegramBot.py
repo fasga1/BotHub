@@ -81,6 +81,23 @@ async def get_password(update, context):
 
     return ConversationHandler.END
 
+async def show_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.callback_query:
+        await update.callback_query.edit_message_text(
+            text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
+            reply_markup=KeyboardManager.get_employee_inline_keyboard(EMPLOYEES)
+        )
+    else:
+        await update.message.reply_text(
+            text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
+            reply_markup=KeyboardManager.get_employee_inline_keyboard(EMPLOYEES)
+        )
+
+async def back_to_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    await show_employees(update, context)
+
 async def employee_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
@@ -126,7 +143,7 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif style_type == "friendly":
         message = (
             f"Привет, {employee_name}! 🎉\n\n"
-            "С днём рождения! Желаю море позитива, "
+            "С днём рождения! Желаем море позитива, "
             "крутых идей и чтобы все задачи решались сами! 😎"
         )
     else:
@@ -153,6 +170,7 @@ def main():
     app.add_handler(conv_handler)
     app.add_handler(CallbackQueryHandler(employee_selected, pattern=r"^select_"))
     app.add_handler(CallbackQueryHandler(style_selected, pattern=r"^style_"))
+    app.add_handler(CallbackQueryHandler(back_to_employees, pattern=r"^back_to_employees"))  # ← добавлено
 
     print("Бот запущен!")
     app.run_polling()
