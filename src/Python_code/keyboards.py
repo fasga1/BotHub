@@ -37,3 +37,16 @@ class KeyboardManager:
             [InlineKeyboardButton("Полностью переписать", callback_data=f"feedback_rewrite_{employee_name}")]
         ]
         return InlineKeyboardMarkup(buttons)
+
+    @staticmethod
+    def get_like_confirmation_keyboard():
+        buttons = [
+            [InlineKeyboardButton("Да, вернуться к списку", callback_data="like_yes")],
+            [InlineKeyboardButton("Нет, закончить", callback_data="like_no")]
+        ]
+        return InlineKeyboardMarkup(buttons)
+
+    @staticmethod
+    def get_back_to_employees_button():
+        button = InlineKeyboardButton("К списку сотрудников", callback_data="back_to_employees")
+        return InlineKeyboardMarkup([[button]])

@@ -121,9 +121,6 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     style_type = parts[1]
     employee_name = parts[2]
 
-    context.user_data['current_employee'] = employee_name
-    context.user_data['current_style'] = style_type
-
     if style_type == "official":
         message = (
             f"Уважаемый(ая) {employee_name}!\n\n"
@@ -146,8 +143,6 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         message = "Неизвестный стиль."
 
-    context.user_data['current_message'] = message
-
     await query.edit_message_text(
         text=message,
         reply_markup=KeyboardManager.get_feedback_inline_keyboard(employee_name)
@@ -156,7 +151,10 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def feedback_like(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
-    await query.edit_message_text("Отлично! Рады, что вам понравилось!")
+    await query.edit_message_text(
+        text="Прекрасно, хотите поздравить кого-то ещё?",
+        reply_markup=KeyboardManager.get_like_confirmation_keyboard()
+    )
 
 async def feedback_rewrite(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -181,6 +179,16 @@ async def feedback_edit_start(update: Update, context: ContextTypes.DEFAULT_TYPE
         "Пожалуйста, введите вашу версию поздравления:"
     )
 
+async def like_yes(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    await show_employees(update, context)
+
+async def like_no(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    await query.edit_message_text("Спасибо за использование бота! До новых встреч!")
+
 async def handle_edit_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('awaiting_edit'):
         edited_text = update.message.text.strip()
@@ -190,7 +198,8 @@ async def handle_edit_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         await update.message.reply_text(
             f"Ваше поздравление для {employee_name}:\n\n{edited_text}\n\n"
-            "Отправлено! Спасибо за правки!"
+            "Отправлено! Спасибо за правки!",
+            reply_markup=KeyboardManager.get_back_to_employees_button()
         )
         return
 
@@ -214,6 +223,8 @@ def main():
     app.add_handler(CallbackQueryHandler(feedback_like, pattern=r"^feedback_like_"))
     app.add_handler(CallbackQueryHandler(feedback_rewrite, pattern=r"^feedback_rewrite_"))
     app.add_handler(CallbackQueryHandler(feedback_edit_start, pattern=r"^feedback_edit_"))
+    app.add_handler(CallbackQueryHandler(like_yes, pattern=r"^like_yes"))
+    app.add_handler(CallbackQueryHandler(like_no, pattern=r"^like_no"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_edit_text))
 
 

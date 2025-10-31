@@ -14,10 +14,18 @@ def get_db_connection():
     )
 
 def get_all_employees():
-    conn = get_db_connection()
-    try:
-        with conn.cursor(cursor_factory=RealDictCursor) as cur:
-            cur.execute("SELECT full_name FROM employees ORDER BY full_name")
-            return [row['full_name'] for row in cur.fetchall()]
-    finally:
-        conn.close()
+    return [
+        "Анна Петрова",
+        "Иван Смирнов",
+        "Мария Козлова",
+        "Алексей Иванов",
+        "Екатерина Соколова",
+        "Ольга Новикова"  # ← можно добавлять сколько угодно
+    ]
+    #conn = get_db_connection()
+    #try:
+    #    with conn.cursor(cursor_factory=RealDictCursor) as cur:
+    #        cur.execute("SELECT full_name FROM employees ORDER BY full_name")
+    #        return [row['full_name'] for row in cur.fetchall()]
+    #finally:
+    #    conn.close()
