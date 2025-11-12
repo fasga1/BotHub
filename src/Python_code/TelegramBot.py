@@ -62,22 +62,25 @@ async def get_login(update, context):
     await update.message.reply_text("Введите ваш пароль:")
     return PASSWORD
 
+
 async def get_password(update, context):
     user_password = update.message.text.strip()
     user_login = context.user_data.get('login')
 
     if verify_community_manager(user_login, user_password):
         employees = get_all_employees()
+
+        employee_keyboard = KeyboardManager.get_employee_inline_keyboard(employees)
+
         await update.message.reply_text(
             "Доступ открыт!\n"
             "Сегодня праздники у нескольких сотрудников.\n"
             "Выберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard(employees)
+            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
         )
     else:
         await update.message.reply_text(
-            "Неверный логин или пароль.\n"
-            "Попробуйте снова:",
+            "Неверный логин или пароль.\nПопробуйте снова:",
             reply_markup=KeyboardManager.get_register_button()
         )
         return ConversationHandler.END
@@ -89,12 +92,12 @@ async def show_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.callback_query:
         await update.callback_query.edit_message_text(
             text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard(employees)
+            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
         )
     else:
         await update.message.reply_text(
             text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard(employees)
+            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
         )
 
 async def back_to_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -209,9 +212,14 @@ async def handle_edit_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             f"Ваше поздравление для {employee_name}:\n\n{edited_text}\n\n"
             "Отправлено! Спасибо за правки!",
-            reply_markup=KeyboardManager.get_back_to_employees_button()
+            reply_markup=KeyboardManager.get_post_edit_keyboard()  # ← новая клавиатура
         )
         return
+
+async def finish_bot(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    await query.edit_message_text("Спасибо за использование бота! До новых встреч! 👋")
 
 def main():
     app = Application.builder().token(TOKEN).build()
@@ -235,6 +243,7 @@ def main():
     app.add_handler(CallbackQueryHandler(feedback_edit_start, pattern=r"^feedback_edit_"))
     app.add_handler(CallbackQueryHandler(like_yes, pattern=r"^like_yes"))
     app.add_handler(CallbackQueryHandler(like_no, pattern=r"^like_no"))
+    app.add_handler(CallbackQueryHandler(finish_bot, pattern=r"^finish_bot"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_edit_text))
 
 

@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added buttons back to employess list">
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added Comunity_managers db table">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Python_code/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Python_code/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/keyboards.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +236,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761909980843</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="develop/Potap_branch Added Comunity_managers db table">
+      <option name="closed" value="true" />
+      <created>1762940552059</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1762940552059</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -253,6 +261,7 @@
     <MESSAGE value="develop/Potap_branch Added &quot;Like,&quot; &quot;Edit,&quot; and &quot;Rewrite&quot; buttons" />
     <MESSAGE value="develop/Potap_branch Added an employee database and its connection to the system itself" />
     <MESSAGE value="develop/Potap_branch Added buttons back to employess list" />
-    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added buttons back to employess list" />
+    <MESSAGE value="develop/Potap_branch Added Comunity_managers db table" />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added Comunity_managers db table" />
   </component>
 </project>
