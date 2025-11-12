@@ -196,7 +196,10 @@ async def like_yes(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def like_no(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
-    await query.edit_message_text("Спасибо за использование бота! До новых встреч!")
+    await query.edit_message_text(
+        "Спасибо за использование бота! До новых встреч! \n\n"
+        "Чтобы начать заново, отправьте команду /start."
+    )
 
 async def handle_edit_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('awaiting_edit'):
@@ -212,10 +215,17 @@ async def handle_edit_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
+
 async def finish_bot(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
-    await query.edit_message_text("Спасибо за использование бота! До новых встреч!")
+
+    context.user_data.clear()
+
+    await query.edit_message_text(
+        "Спасибо за использование бота! До новых встреч! \n\n"
+        "Чтобы начать заново, отправьте команду /start."
+    )
 
 def main():
     app = Application.builder().token(TOKEN).build()
