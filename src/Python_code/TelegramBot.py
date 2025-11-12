@@ -12,7 +12,7 @@ from states import LOGIN, PASSWORD
 import re
 from telegram import Update
 from telegram.ext import ContextTypes, CallbackQueryHandler
-from database import get_all_employees
+from database import get_all_employees, verify_community_manager
 load_dotenv()
 
 
@@ -64,14 +64,24 @@ async def get_login(update, context):
 
 async def get_password(update, context):
     user_password = update.message.text.strip()
-    context.user_data['password'] = user_password
-    employees = get_all_employees()
-    await update.message.reply_text(
-        "Доступ открыт!\n"
-        "Сегодня праздники у нескольких сотрудников.\n"
-        "Выберите сотрудника, которого хотите поздравить:",
-        reply_markup=KeyboardManager.get_employee_inline_keyboard(employees)
-    )
+    user_login = context.user_data.get('login')
+
+    if verify_community_manager(user_login, user_password):
+        employees = get_all_employees()
+        await update.message.reply_text(
+            "Доступ открыт!\n"
+            "Сегодня праздники у нескольких сотрудников.\n"
+            "Выберите сотрудника, которого хотите поздравить:",
+            reply_markup=KeyboardManager.get_employee_inline_keyboard(employees)
+        )
+    else:
+        await update.message.reply_text(
+            "Неверный логин или пароль.\n"
+            "Попробуйте снова:",
+            reply_markup=KeyboardManager.get_register_button()
+        )
+        return ConversationHandler.END
+
     return ConversationHandler.END
 
 async def show_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):

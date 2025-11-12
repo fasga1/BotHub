@@ -14,18 +14,22 @@ def get_db_connection():
     )
 
 def get_all_employees():
-    return [
-        "Анна Петрова",
-        "Иван Смирнов",
-        "Мария Козлова",
-        "Алексей Иванов",
-        "Екатерина Соколова",
-        "Ольга Новикова"  # ← можно добавлять сколько угодно
-    ]
-    #conn = get_db_connection()
-    #try:
-    #    with conn.cursor(cursor_factory=RealDictCursor) as cur:
-    #        cur.execute("SELECT full_name FROM employees ORDER BY full_name")
-    #        return [row['full_name'] for row in cur.fetchall()]
-    #finally:
-    #    conn.close()
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("SELECT full_name FROM employees ORDER BY full_name")
+            return [row['full_name'] for row in cur.fetchall()]
+    finally:
+        conn.close()
+
+def verify_community_manager(email: str, password: str) -> bool:
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(
+                "SELECT 1 FROM community_managers WHERE email = %s AND password_hash = %s",
+                (email, password)
+            )
+            return cur.fetchone() is not None
+    finally:
+        conn.close()
