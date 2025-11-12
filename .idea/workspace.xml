@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="WB_congratulations_bot">
-      <change beforePath="$PROJECT_DIR$/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch All unused buttons and functions have been removed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,20 +21,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "fasga1"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;fasga1&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/fasga1/BotHub.git",
-    "accountId": "30b591fb-118b-4ea1-8d30-a0dfa11fea96"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/fasga1/BotHub.git&quot;,
+    &quot;accountId&quot;: &quot;30b591fb-118b-4ea1-8d30-a0dfa11fea96&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -46,115 +52,21 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.TelegramBot.executor": "Run",
+    "Python.database.executor": "Run",
+    "Python.keyboards.executor": "Run",
+    "Python.test_db.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "Potap__branch",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="BotHub" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="BotHub" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docs" factoryName="Docutils task">
-      <module name="BotHub" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="docutils_input_file" value="" />
-      <option name="docutils_output_file" value="" />
-      <option name="docutils_params" value="" />
-      <option name="docutils_task" value="" />
-      <option name="docutils_open_in_browser" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docs" factoryName="Sphinx task">
-      <module name="BotHub" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="docutils_input_file" value="" />
-      <option name="docutils_output_file" value="" />
-      <option name="docutils_params" value="" />
-      <option name="docutils_task" value="" />
-      <option name="docutils_open_in_browser" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Autodetect">
-      <module name="BotHub" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="BotHub" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method v="2" />
-    </configuration>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Python_code" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -187,11 +99,186 @@
       <option name="project" value="LOCAL" />
       <updated>1760620100472</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="WB_congratulations_bot">
+      <option name="closed" value="true" />
+      <created>1760620357804</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1760620357804</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1760620571701</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1760620571701</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1760621876353</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1760621876353</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1760621902890</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1760621902890</updated>
+    </task>
+    <task id="LOCAL-00007" summary="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <option name="closed" value="true" />
+      <created>1760627322122</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760627322122</updated>
+    </task>
+    <task id="LOCAL-00008" summary="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <option name="closed" value="true" />
+      <created>1760627346217</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1760627346217</updated>
+    </task>
+    <task id="LOCAL-00009" summary="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <option name="closed" value="true" />
+      <created>1760632553063</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1760632553063</updated>
+    </task>
+    <task id="LOCAL-00010" summary="develop/Potap_branch created a separate .py file in which I added a class for creating buttons.">
+      <option name="closed" value="true" />
+      <created>1760791628498</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760791628498</updated>
+    </task>
+    <task id="LOCAL-00011" summary="develop/Potap_branch &#10;Created a states.py file to store states">
+      <option name="closed" value="true" />
+      <created>1760793474414</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760793474414</updated>
+    </task>
+    <task id="LOCAL-00012" summary="develop/Potap_branch Added a dialog to the bot and the ability to register">
+      <option name="closed" value="true" />
+      <created>1760794200607</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1760794200607</updated>
+    </task>
+    <task id="LOCAL-00013" summary="develop/Potap_branch Added login template checking">
+      <option name="closed" value="true" />
+      <created>1760810828993</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1760810828993</updated>
+    </task>
+    <task id="LOCAL-00014" summary="develop/Potap_branch Added a list of employees and the ability to select">
+      <option name="closed" value="true" />
+      <created>1760819110656</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1760819110656</updated>
+    </task>
+    <task id="LOCAL-00015" summary="develop/Potap_branch Added a choice of greeting styles">
+      <option name="closed" value="true" />
+      <created>1761305322369</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1761305322369</updated>
+    </task>
+    <task id="LOCAL-00016" summary="develop/Potap_branch Added a button &quot;back&quot; to the list of employees">
+      <option name="closed" value="true" />
+      <created>1761311570192</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1761311570192</updated>
+    </task>
+    <task id="LOCAL-00017" summary="develop/Potap_branch Added &quot;Like,&quot; &quot;Edit,&quot; and &quot;Rewrite&quot; buttons">
+      <option name="closed" value="true" />
+      <created>1761313014269</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1761313014269</updated>
+    </task>
+    <task id="LOCAL-00018" summary="develop/Potap_branch Added an employee database and its connection to the system itself">
+      <option name="closed" value="true" />
+      <created>1761339050635</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1761339050635</updated>
+    </task>
+    <task id="LOCAL-00019" summary="develop/Potap_branch Added buttons back to employess list">
+      <option name="closed" value="true" />
+      <created>1761909980843</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1761909980843</updated>
+    </task>
+    <task id="LOCAL-00020" summary="develop/Potap_branch Added Comunity_managers db table">
+      <option name="closed" value="true" />
+      <created>1762940552059</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1762940552059</updated>
+    </task>
+    <task id="LOCAL-00021" summary="develop/Potap_branch Added back to list of employees button">
+      <option name="closed" value="true" />
+      <created>1762942231343</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1762942231343</updated>
+    </task>
+    <task id="LOCAL-00022" summary="develop/Potap_branch All unused buttons and functions have been removed">
+      <option name="closed" value="true" />
+      <created>1762942590363</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1762942590363</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="WB_congratulations_bot" />
-    <option name="LAST_COMMIT_MESSAGE" value="WB_congratulations_bot" />
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token." />
+    <MESSAGE value="develop/Potap_branch created a separate .py file in which I added a class for creating buttons." />
+    <MESSAGE value="develop/Potap_branch &#10;Created a states.py file to store states" />
+    <MESSAGE value="develop/Potap_branch Added a dialog to the bot and the ability to register" />
+    <MESSAGE value="develop/Potap_branch Added login template checking" />
+    <MESSAGE value="develop/Potap_branch Added a list of employees and the ability to select" />
+    <MESSAGE value="develop/Potap_branch Added a choice of greeting styles" />
+    <MESSAGE value="develop/Potap_branch Added a button &quot;back&quot; to the list of employees" />
+    <MESSAGE value="develop/Potap_branch Added &quot;Like,&quot; &quot;Edit,&quot; and &quot;Rewrite&quot; buttons" />
+    <MESSAGE value="develop/Potap_branch Added an employee database and its connection to the system itself" />
+    <MESSAGE value="develop/Potap_branch Added buttons back to employess list" />
+    <MESSAGE value="develop/Potap_branch Added Comunity_managers db table" />
+    <MESSAGE value="develop/Potap_branch Added back to list of employees button" />
+    <MESSAGE value="develop/Potap_branch All unused buttons and functions have been removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch All unused buttons and functions have been removed" />
   </component>
 </project>
