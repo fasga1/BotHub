@@ -18,8 +18,6 @@ load_dotenv()
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-user_data = {}
-
 async def start(update, context):
     reply_markup = KeyboardManager.get_register_button()  # 👈 Вызываем метод из класса
     await update.message.reply_text(
@@ -69,8 +67,6 @@ async def get_password(update, context):
 
     if verify_community_manager(user_login, user_password):
         employees = get_all_employees()
-
-        employee_keyboard = KeyboardManager.get_employee_inline_keyboard(employees)
 
         await update.message.reply_text(
             "Доступ открыт!\n"
@@ -219,7 +215,7 @@ async def handle_edit_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def finish_bot(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
-    await query.edit_message_text("Спасибо за использование бота! До новых встреч! 👋")
+    await query.edit_message_text("Спасибо за использование бота! До новых встреч!")
 
 def main():
     app = Application.builder().token(TOKEN).build()

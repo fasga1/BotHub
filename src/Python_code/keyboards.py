@@ -13,13 +13,6 @@ class KeyboardManager:
         return ReplyKeyboardRemove()
 
     @staticmethod
-    def get_employee_inline_keyboard(employees):
-        buttons = []
-        for name in employees:
-            buttons.append([InlineKeyboardButton(name, callback_data=f"select_{name}")])
-        return InlineKeyboardMarkup(buttons)
-
-    @staticmethod
     def get_employee_inline_keyboard_with_finish(employees):
         buttons = []
         for name in employees:
@@ -53,16 +46,6 @@ class KeyboardManager:
             [InlineKeyboardButton("Нет, закончить", callback_data="like_no")]
         ]
         return InlineKeyboardMarkup(buttons)
-
-    @staticmethod
-    def get_back_to_employees_button():
-        button = InlineKeyboardButton("К списку сотрудников", callback_data="back_to_employees")
-        return InlineKeyboardMarkup([[button]])
-
-    @staticmethod
-    def get_finish_button():
-        button = InlineKeyboardButton("Закончить работу", callback_data="finish_bot")
-        return InlineKeyboardMarkup([[button]])
 
     @staticmethod
     def get_post_edit_keyboard():
