@@ -12,14 +12,14 @@ from states import LOGIN, PASSWORD
 import re
 from telegram import Update
 from telegram.ext import ContextTypes, CallbackQueryHandler
-from database import get_all_employees, verify_community_manager
+from database import get_employees_with_holidays, verify_community_manager
 load_dotenv()
 
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 async def start(update, context):
-    reply_markup = KeyboardManager.get_register_button()  # 👈 Вызываем метод из класса
+    reply_markup = KeyboardManager.get_register_button()
     await update.message.reply_text(
         "Привет!\nВы запустили WB_Congratulations_bot\n\n"
         "Вот инструкция по пользованию ботом для вас:\n\n"
@@ -33,11 +33,11 @@ async def start(update, context):
 async def register_start(update, context):
     await update.message.reply_text(
         "Введите ваш логин (корпоративная почта):",
-        reply_markup=KeyboardManager.remove_keyboard()  # ← убираем кнопки
+        reply_markup=KeyboardManager.remove_keyboard()
     )
     return LOGIN
 
-CORPORATE_DOMAIN = "st.ithub.ru"  # ← измените на ваш домен
+CORPORATE_DOMAIN = "st.ithub.ru"
 
 async def get_login(update, context):
     user_login = update.message.text.strip()
