@@ -18,7 +18,8 @@ def get_db_connection():
 
 def get_employees_with_holidays():
     today = datetime.now().date()
-    today_mm_dd = today.strftime("%m-%d")
+    today_mm_dd = today_mm_dd = "03-08"
+    """today.strftime("%m-%d")"""
 
     conn = get_db_connection()
     try:

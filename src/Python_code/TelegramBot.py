@@ -66,13 +66,22 @@ async def get_password(update, context):
     user_login = context.user_data.get('login')
 
     if verify_community_manager(user_login, user_password):
-        employees = get_all_employees()
+        employees = get_employees_with_holidays()
+
+        if not employees:
+            await update.message.reply_text(
+                "Сегодня нет праздников у сотрудников. \n"
+                "Попробуйте завтра!",
+                reply_markup=KeyboardManager.get_finish_button()
+            )
+            return ConversationHandler.END
 
         await update.message.reply_text(
             "Доступ открыт!\n"
-            "Сегодня праздники у нескольких сотрудников.\n"
-            "Выберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
+            "Сегодня праздники у следующих сотрудников:",
+            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(
+                [emp['full_name'] for emp in employees]
+            )
         )
     else:
         await update.message.reply_text(
@@ -83,17 +92,28 @@ async def get_password(update, context):
 
     return ConversationHandler.END
 
+
 async def show_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    employees = get_all_employees()
+    employees = get_employees_with_holidays()
+
+    if not employees:
+        text = "Сегодня нет праздников у сотрудников. Попробуйте завтра!"
+        reply_markup = KeyboardManager.get_finish_button()
+    else:
+        text = "Сегодня праздники у следующих сотрудников:"
+        reply_markup = KeyboardManager.get_employee_inline_keyboard_with_finish(
+            [emp['full_name'] for emp in employees]
+        )
+
     if update.callback_query:
         await update.callback_query.edit_message_text(
-            text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
+            text=text,
+            reply_markup=reply_markup
         )
     else:
         await update.message.reply_text(
-            text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
+            text=text,
+            reply_markup=reply_markup
         )
 
 async def back_to_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
