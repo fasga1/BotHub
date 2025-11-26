@@ -12,7 +12,7 @@ from states import LOGIN, PASSWORD
 import re
 from telegram import Update
 from telegram.ext import ContextTypes, CallbackQueryHandler
-from database import get_employees_with_holidays, verify_community_manager
+from database import get_employees_with_holidays, verify_community_manager, email_exists_in_db
 load_dotenv()
 
 
@@ -37,7 +37,7 @@ async def register_start(update, context):
     )
     return LOGIN
 
-CORPORATE_DOMAIN = "st.ithub.ru"
+CORPORATE_DOMAIN = "rwb.ru"
 
 async def get_login(update, context):
     user_login = update.message.text.strip()
@@ -49,9 +49,16 @@ async def get_login(update, context):
         )
         return LOGIN
 
-    if not user_login.endswith(f"@{CORPORATE_DOMAIN}"):
+    if not user_login.lower().endswith(f"@{CORPORATE_DOMAIN.lower()}"):
         await update.message.reply_text(
             f"Почта должна быть корпоративной (@{CORPORATE_DOMAIN}).\n"
+            "Попробуйте снова:"
+        )
+        return LOGIN
+
+    if not email_exists_in_db(user_login):
+        await update.message.reply_text(
+            "Такой почты нет в базе данных.\n"
             "Попробуйте снова:"
         )
         return LOGIN
@@ -62,35 +69,46 @@ async def get_login(update, context):
 
 
 async def get_password(update, context):
+    if 'password_attempts' not in context.user_data:
+        context.user_data['password_attempts'] = 0
+
     user_password = update.message.text.strip()
     user_login = context.user_data.get('login')
 
     if verify_community_manager(user_login, user_password):
+        context.user_data.pop('password_attempts', None)
         employees = get_employees_with_holidays()
 
         if not employees:
             await update.message.reply_text(
-                "Сегодня нет праздников у сотрудников. \n"
-                "Попробуйте завтра!",
+                "Сегодня нет праздников у сотрудников. \nПопробуйте завтра!",
                 reply_markup=KeyboardManager.get_finish_button()
             )
             return ConversationHandler.END
 
         await update.message.reply_text(
-            "Доступ открыт!\n"
-            "Сегодня праздники у следующих сотрудников:",
+            "Доступ открыт!\nСегодня праздники у следующих сотрудников:",
             reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(
                 [emp['full_name'] for emp in employees]
             )
         )
-    else:
-        await update.message.reply_text(
-            "Неверный логин или пароль.\nПопробуйте снова:",
-            reply_markup=KeyboardManager.get_register_button()
-        )
         return ConversationHandler.END
 
-    return ConversationHandler.END
+    else:
+        context.user_data['password_attempts'] += 1
+
+        if context.user_data['password_attempts'] >= 3:
+            await update.message.reply_text(
+                "Превышено количество попыток. Попробуйте позже.",
+                reply_markup=KeyboardManager.get_register_button()
+            )
+            context.user_data.clear()
+            return ConversationHandler.END
+        else:
+            await update.message.reply_text(
+                f"Неверный пароль. Попытка {context.user_data['password_attempts']}/3. Попробуйте снова:",
+            )
+            return PASSWORD
 
 
 async def show_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -257,6 +275,7 @@ def main():
             PASSWORD: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_password)],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
+        allow_reentry=True
     )
 
     app.add_handler(CommandHandler("start", start))

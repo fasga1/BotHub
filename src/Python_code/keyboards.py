@@ -1,7 +1,7 @@
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 class KeyboardManager:
-    REGISTER = "Зарегистрироваться"
+    REGISTER = "ВОЙТИ"
 
     @staticmethod
     def get_register_button():

@@ -18,7 +18,7 @@ def get_db_connection():
 
 def get_employees_with_holidays():
     today = datetime.now().date()
-    today_mm_dd = today_mm_dd = "03-08"
+    today_mm_dd = "02-23"
     """today.strftime("%m-%d")"""
 
     conn = get_db_connection()
@@ -57,8 +57,20 @@ def verify_community_manager(email: str, password: str) -> bool:
     try:
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(
-                "SELECT 1 FROM community_managers WHERE email = %s AND password_hash = %s",
+                "SELECT 1 FROM community_managers WHERE LOWER(email) = LOWER(%s) AND password_hash = %s",
                 (email, password)
+            )
+            return cur.fetchone() is not None
+    finally:
+        conn.close()
+
+def email_exists_in_db(email: str) -> bool:
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                "SELECT 1 FROM community_managers WHERE email = %s",
+                (email,)
             )
             return cur.fetchone() is not None
     finally:
