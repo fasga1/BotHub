@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch All unused buttons and functions have been removed">
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Python_code/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Python_code/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/keyboards.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +261,31 @@
       <option name="project" value="LOCAL" />
       <updated>1762942590363</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="develop/Potap_branch Added a function to terminate the bot without terminating the script.">
+      <option name="closed" value="true" />
+      <created>1762943976115</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1762943976115</updated>
+    </task>
+    <task id="LOCAL-00024" summary="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday">
+      <option name="closed" value="true" />
+      <created>1764083072283</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1764083072283</updated>
+    </task>
+    <task id="LOCAL-00025" summary="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday">
+      <option name="closed" value="true" />
+      <created>1764086095578</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1764086095578</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -279,6 +305,8 @@
     <MESSAGE value="develop/Potap_branch Added Comunity_managers db table" />
     <MESSAGE value="develop/Potap_branch Added back to list of employees button" />
     <MESSAGE value="develop/Potap_branch All unused buttons and functions have been removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch All unused buttons and functions have been removed" />
+    <MESSAGE value="develop/Potap_branch Added a function to terminate the bot without terminating the script." />
+    <MESSAGE value="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday" />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday" />
   </component>
 </project>
