@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday">
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Python_code/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Python_code/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/keyboards.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,20 +50,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.TelegramBot.executor": "Run",
-    "Python.database.executor": "Run",
-    "Python.keyboards.executor": "Run",
-    "Python.test_db.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Potap__branch",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.TelegramBot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.database.executor&quot;: &quot;Run&quot;,
+    &quot;Python.keyboards.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_db.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Potap__branch&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Python_code" />
@@ -285,7 +285,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764086095578</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="develop/Potap_branch Added some fixes, detecting wron Email, added 3 times check password">
+      <option name="closed" value="true" />
+      <created>1764152741317</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1764152741317</updated>
+    </task>
+    <task id="LOCAL-00027" summary="develop/Potap_branch Added some fixes, detecting wron Email, added 3 times check password">
+      <option name="closed" value="true" />
+      <created>1764586564531</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1764586564531</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -307,6 +323,7 @@
     <MESSAGE value="develop/Potap_branch All unused buttons and functions have been removed" />
     <MESSAGE value="develop/Potap_branch Added a function to terminate the bot without terminating the script." />
     <MESSAGE value="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday" />
-    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday" />
+    <MESSAGE value="develop/Potap_branch Added some fixes, detecting wron Email, added 3 times check password" />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added some fixes, detecting wron Email, added 3 times check password" />
   </component>
 </project>

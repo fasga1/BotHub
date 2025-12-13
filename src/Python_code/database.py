@@ -8,18 +8,32 @@ load_dotenv()
 
 
 def get_db_connection():
-    return psycopg2.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        database=os.getenv("DB_NAME"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD")
-    )
+    host = os.getenv("DB_HOST", "localhost")
+    database = os.getenv("DB_NAME")
+    user = os.getenv("DB_USER")
+    password = os.getenv("DB_PASSWORD")
+
+    if host in ["localhost", "127.0.0.1"] or host.startswith("192.168."):
+        return psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password
+        )
+    else:
+        return psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            sslmode="require"
+        )
 
 
 def get_employees_with_holidays():
-    today = datetime.now().date()
-    today_mm_dd = "02-23"
-    """today.strftime("%m-%d")"""
+    # today = datetime.now().date()
+    # today_mm_dd = today.strftime("%m-%d")
+    today_mm_dd = "02-23"  # Тестовая дата (23 февраля)
 
     conn = get_db_connection()
     try:
@@ -46,7 +60,6 @@ def get_employees_with_holidays():
                         OR (%s = '02-23' AND gender = 'M')
                     ORDER BY full_name
                 """, (today_mm_dd, today_mm_dd, today_mm_dd, today_mm_dd, today_mm_dd, today_mm_dd))
-
             return cur.fetchall()
     finally:
         conn.close()
@@ -64,6 +77,7 @@ def verify_community_manager(email: str, password: str) -> bool:
     finally:
         conn.close()
 
+
 def email_exists_in_db(email: str) -> bool:
     conn = get_db_connection()
     try:
@@ -73,5 +87,28 @@ def email_exists_in_db(email: str) -> bool:
                 (email,)
             )
             return cur.fetchone() is not None
+    finally:
+        conn.close()
+
+
+def update_manager_chat_id(email: str, chat_id: int):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                "UPDATE community_managers SET chat_id = %s WHERE email = %s",
+                (chat_id, email)
+            )
+            conn.commit()
+    finally:
+        conn.close()
+
+
+def get_all_manager_chat_ids():
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT chat_id FROM community_managers WHERE chat_id IS NOT NULL")
+            return [row[0] for row in cur.fetchall()]
     finally:
         conn.close()

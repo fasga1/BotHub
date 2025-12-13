@@ -12,7 +12,14 @@ from states import LOGIN, PASSWORD
 import re
 from telegram import Update
 from telegram.ext import ContextTypes, CallbackQueryHandler
-from database import get_employees_with_holidays, verify_community_manager, email_exists_in_db
+from database import (
+    get_employees_with_holidays,
+    verify_community_manager,
+    email_exists_in_db,
+    update_manager_chat_id
+)
+from apscheduler.schedulers.background import BackgroundScheduler
+import threading
 load_dotenv()
 
 
@@ -77,6 +84,10 @@ async def get_password(update, context):
 
     if verify_community_manager(user_login, user_password):
         context.user_data.pop('password_attempts', None)
+
+        chat_id = update.effective_chat.id
+        update_manager_chat_id(user_login, chat_id)
+
         employees = get_employees_with_holidays()
 
         if not employees:
@@ -265,7 +276,48 @@ async def finish_bot(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Чтобы начать заново, отправьте команду /start."
     )
 
+
+def send_daily_congratulations():
+    from database import get_employees_with_holidays, get_all_manager_chat_ids
+    import requests
+    import json
+
+    employees = get_employees_with_holidays()
+    if not employees:
+        return
+
+    chat_ids = get_all_manager_chat_ids()
+    if not chat_ids:
+        return
+
+    message = (
+            "📅 Сегодня праздники у сотрудников:\n" +
+            "\n".join(f"• {emp['full_name']}" for emp in employees) +
+            "\n\nНажмите /start, чтобы поздравить!"
+    )
+
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+
+    for chat_id in chat_ids:
+        try:
+            requests.post(url, json={
+                "chat_id": chat_id,
+                "text": message
+            })
+        except Exception as e:
+            print(f"Ошибка отправки менеджеру {chat_id}: {e}")
+
 def main():
+    scheduler = BackgroundScheduler(timezone="Europe/Moscow")
+    scheduler.add_job(
+        send_daily_congratulations,
+        trigger="cron",
+        hour=9,
+        minute=0
+    )
+    scheduler.start()
+
     app = Application.builder().token(TOKEN).build()
 
     conv_handler = ConversationHandler(
@@ -291,9 +343,11 @@ def main():
     app.add_handler(CallbackQueryHandler(finish_bot, pattern=r"^finish_bot"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_edit_text))
 
-
     print("Бот запущен!")
-    app.run_polling()
+    try:
+        app.run_polling()
+    except KeyboardInterrupt:
+        scheduler.shutdown()
 
 if __name__ == '__main__':
     main()
