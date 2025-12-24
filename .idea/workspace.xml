@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="WB_congratulations_bot">
+    <list default="true" id="9621f670-b226-4e19-91ed-dc346dd04d0d" name="Changes" comment="develop/Potap_branch Added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/TelegramBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Python_code/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Python_code/database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +36,12 @@
     &quot;assignee&quot;: &quot;fasga1&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/fasga1/BotHub.git",
-    "accountId": "75b0f545-e3d4-4fd0-a9c2-b4831973580c"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/fasga1/BotHub.git&quot;,
+    &quot;accountId&quot;: &quot;30b591fb-118b-4ea1-8d30-a0dfa11fea96&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -48,34 +50,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.TelegramBot.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Daniil__branch",
-    "ignore.virus.scanning.warn.message": "true",
-    "settings.editor.selected.configurable": "terminal"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.TelegramBot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.database.executor&quot;: &quot;Run&quot;,
+    &quot;Python.keyboards.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_db.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Potap__branch&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="ShConfigurationType">
-      <option name="SCRIPT_TEXT" value="" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="powershell.exe" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="true" />
-      <envs />
-      <method v="2" />
-    </configuration>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Python_code" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -108,11 +101,229 @@
       <option name="project" value="LOCAL" />
       <updated>1760620100472</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="WB_congratulations_bot">
+      <option name="closed" value="true" />
+      <created>1760620357804</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1760620357804</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1760620571701</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1760620571701</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1760621876353</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1760621876353</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1760621902890</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1760621902890</updated>
+    </task>
+    <task id="LOCAL-00007" summary="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <option name="closed" value="true" />
+      <created>1760627322122</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760627322122</updated>
+    </task>
+    <task id="LOCAL-00008" summary="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <option name="closed" value="true" />
+      <created>1760627346217</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1760627346217</updated>
+    </task>
+    <task id="LOCAL-00009" summary="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token.">
+      <option name="closed" value="true" />
+      <created>1760632553063</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1760632553063</updated>
+    </task>
+    <task id="LOCAL-00010" summary="develop/Potap_branch created a separate .py file in which I added a class for creating buttons.">
+      <option name="closed" value="true" />
+      <created>1760791628498</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760791628498</updated>
+    </task>
+    <task id="LOCAL-00011" summary="develop/Potap_branch &#10;Created a states.py file to store states">
+      <option name="closed" value="true" />
+      <created>1760793474414</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760793474414</updated>
+    </task>
+    <task id="LOCAL-00012" summary="develop/Potap_branch Added a dialog to the bot and the ability to register">
+      <option name="closed" value="true" />
+      <created>1760794200607</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1760794200607</updated>
+    </task>
+    <task id="LOCAL-00013" summary="develop/Potap_branch Added login template checking">
+      <option name="closed" value="true" />
+      <created>1760810828993</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1760810828993</updated>
+    </task>
+    <task id="LOCAL-00014" summary="develop/Potap_branch Added a list of employees and the ability to select">
+      <option name="closed" value="true" />
+      <created>1760819110656</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1760819110656</updated>
+    </task>
+    <task id="LOCAL-00015" summary="develop/Potap_branch Added a choice of greeting styles">
+      <option name="closed" value="true" />
+      <created>1761305322369</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1761305322369</updated>
+    </task>
+    <task id="LOCAL-00016" summary="develop/Potap_branch Added a button &quot;back&quot; to the list of employees">
+      <option name="closed" value="true" />
+      <created>1761311570192</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1761311570192</updated>
+    </task>
+    <task id="LOCAL-00017" summary="develop/Potap_branch Added &quot;Like,&quot; &quot;Edit,&quot; and &quot;Rewrite&quot; buttons">
+      <option name="closed" value="true" />
+      <created>1761313014269</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1761313014269</updated>
+    </task>
+    <task id="LOCAL-00018" summary="develop/Potap_branch Added an employee database and its connection to the system itself">
+      <option name="closed" value="true" />
+      <created>1761339050635</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1761339050635</updated>
+    </task>
+    <task id="LOCAL-00019" summary="develop/Potap_branch Added buttons back to employess list">
+      <option name="closed" value="true" />
+      <created>1761909980843</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1761909980843</updated>
+    </task>
+    <task id="LOCAL-00020" summary="develop/Potap_branch Added Comunity_managers db table">
+      <option name="closed" value="true" />
+      <created>1762940552059</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1762940552059</updated>
+    </task>
+    <task id="LOCAL-00021" summary="develop/Potap_branch Added back to list of employees button">
+      <option name="closed" value="true" />
+      <created>1762942231343</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1762942231343</updated>
+    </task>
+    <task id="LOCAL-00022" summary="develop/Potap_branch All unused buttons and functions have been removed">
+      <option name="closed" value="true" />
+      <created>1762942590363</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1762942590363</updated>
+    </task>
+    <task id="LOCAL-00023" summary="develop/Potap_branch Added a function to terminate the bot without terminating the script.">
+      <option name="closed" value="true" />
+      <created>1762943976115</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1762943976115</updated>
+    </task>
+    <task id="LOCAL-00024" summary="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday">
+      <option name="closed" value="true" />
+      <created>1764083072283</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1764083072283</updated>
+    </task>
+    <task id="LOCAL-00025" summary="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday">
+      <option name="closed" value="true" />
+      <created>1764086095578</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1764086095578</updated>
+    </task>
+    <task id="LOCAL-00026" summary="develop/Potap_branch Added some fixes, detecting wron Email, added 3 times check password">
+      <option name="closed" value="true" />
+      <created>1764152741317</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1764152741317</updated>
+    </task>
+    <task id="LOCAL-00027" summary="develop/Potap_branch Added some fixes, detecting wron Email, added 3 times check password">
+      <option name="closed" value="true" />
+      <created>1764586564531</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1764586564531</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="WB_congratulations_bot" />
-    <option name="LAST_COMMIT_MESSAGE" value="WB_congratulations_bot" />
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="develop/Potap_branch Added a welcome email, a &quot;Register&quot; button, and protected the bot token." />
+    <MESSAGE value="develop/Potap_branch created a separate .py file in which I added a class for creating buttons." />
+    <MESSAGE value="develop/Potap_branch &#10;Created a states.py file to store states" />
+    <MESSAGE value="develop/Potap_branch Added a dialog to the bot and the ability to register" />
+    <MESSAGE value="develop/Potap_branch Added login template checking" />
+    <MESSAGE value="develop/Potap_branch Added a list of employees and the ability to select" />
+    <MESSAGE value="develop/Potap_branch Added a choice of greeting styles" />
+    <MESSAGE value="develop/Potap_branch Added a button &quot;back&quot; to the list of employees" />
+    <MESSAGE value="develop/Potap_branch Added &quot;Like,&quot; &quot;Edit,&quot; and &quot;Rewrite&quot; buttons" />
+    <MESSAGE value="develop/Potap_branch Added an employee database and its connection to the system itself" />
+    <MESSAGE value="develop/Potap_branch Added buttons back to employess list" />
+    <MESSAGE value="develop/Potap_branch Added Comunity_managers db table" />
+    <MESSAGE value="develop/Potap_branch Added back to list of employees button" />
+    <MESSAGE value="develop/Potap_branch All unused buttons and functions have been removed" />
+    <MESSAGE value="develop/Potap_branch Added a function to terminate the bot without terminating the script." />
+    <MESSAGE value="develop/Potap_branch Added filter of holidays, now bot can see only employees who have a holiday" />
+    <MESSAGE value="develop/Potap_branch Added some fixes, detecting wron Email, added 3 times check password" />
+    <option name="LAST_COMMIT_MESSAGE" value="develop/Potap_branch Added some fixes, detecting wron Email, added 3 times check password" />
   </component>
 </project>

@@ -1,0 +1,1 @@
+LOGIN, PASSWORD = range(2)
