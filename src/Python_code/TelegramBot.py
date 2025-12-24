@@ -12,14 +12,21 @@ from states import LOGIN, PASSWORD
 import re
 from telegram import Update
 from telegram.ext import ContextTypes, CallbackQueryHandler
-from database import get_all_employees, verify_community_manager
+from database import (
+    get_employees_with_holidays,
+    verify_community_manager,
+    email_exists_in_db,
+    update_manager_chat_id
+)
+from apscheduler.schedulers.background import BackgroundScheduler
+import threading
 load_dotenv()
 
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 async def start(update, context):
-    reply_markup = KeyboardManager.get_register_button()  # 👈 Вызываем метод из класса
+    reply_markup = KeyboardManager.get_register_button()
     await update.message.reply_text(
         "Привет!\nВы запустили WB_Congratulations_bot\n\n"
         "Вот инструкция по пользованию ботом для вас:\n\n"
@@ -33,11 +40,11 @@ async def start(update, context):
 async def register_start(update, context):
     await update.message.reply_text(
         "Введите ваш логин (корпоративная почта):",
-        reply_markup=KeyboardManager.remove_keyboard()  # ← убираем кнопки
+        reply_markup=KeyboardManager.remove_keyboard()
     )
     return LOGIN
 
-CORPORATE_DOMAIN = "st.ithub.ru"  # ← измените на ваш домен
+CORPORATE_DOMAIN = "rwb.ru"
 
 async def get_login(update, context):
     user_login = update.message.text.strip()
@@ -49,9 +56,16 @@ async def get_login(update, context):
         )
         return LOGIN
 
-    if not user_login.endswith(f"@{CORPORATE_DOMAIN}"):
+    if not user_login.lower().endswith(f"@{CORPORATE_DOMAIN.lower()}"):
         await update.message.reply_text(
             f"Почта должна быть корпоративной (@{CORPORATE_DOMAIN}).\n"
+            "Попробуйте снова:"
+        )
+        return LOGIN
+
+    if not email_exists_in_db(user_login):
+        await update.message.reply_text(
+            "Такой почты нет в базе данных.\n"
             "Попробуйте снова:"
         )
         return LOGIN
@@ -62,38 +76,73 @@ async def get_login(update, context):
 
 
 async def get_password(update, context):
+    if 'password_attempts' not in context.user_data:
+        context.user_data['password_attempts'] = 0
+
     user_password = update.message.text.strip()
     user_login = context.user_data.get('login')
 
     if verify_community_manager(user_login, user_password):
-        employees = get_all_employees()
+        context.user_data.pop('password_attempts', None)
+
+        chat_id = update.effective_chat.id
+        update_manager_chat_id(user_login, chat_id)
+
+        employees = get_employees_with_holidays()
+
+        if not employees:
+            await update.message.reply_text(
+                "Сегодня нет праздников у сотрудников. \nПопробуйте завтра!",
+                reply_markup=KeyboardManager.get_finish_button()
+            )
+            return ConversationHandler.END
 
         await update.message.reply_text(
-            "Доступ открыт!\n"
-            "Сегодня праздники у нескольких сотрудников.\n"
-            "Выберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
-        )
-    else:
-        await update.message.reply_text(
-            "Неверный логин или пароль.\nПопробуйте снова:",
-            reply_markup=KeyboardManager.get_register_button()
+            "Доступ открыт!\nСегодня праздники у следующих сотрудников:",
+            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(
+                [emp['full_name'] for emp in employees]
+            )
         )
         return ConversationHandler.END
 
-    return ConversationHandler.END
+    else:
+        context.user_data['password_attempts'] += 1
+
+        if context.user_data['password_attempts'] >= 3:
+            await update.message.reply_text(
+                "Превышено количество попыток. Попробуйте позже.",
+                reply_markup=KeyboardManager.get_register_button()
+            )
+            context.user_data.clear()
+            return ConversationHandler.END
+        else:
+            await update.message.reply_text(
+                f"Неверный пароль. Попытка {context.user_data['password_attempts']}/3. Попробуйте снова:",
+            )
+            return PASSWORD
+
 
 async def show_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    employees = get_all_employees()
+    employees = get_employees_with_holidays()
+
+    if not employees:
+        text = "Сегодня нет праздников у сотрудников. Попробуйте завтра!"
+        reply_markup = KeyboardManager.get_finish_button()
+    else:
+        text = "Сегодня праздники у следующих сотрудников:"
+        reply_markup = KeyboardManager.get_employee_inline_keyboard_with_finish(
+            [emp['full_name'] for emp in employees]
+        )
+
     if update.callback_query:
         await update.callback_query.edit_message_text(
-            text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
+            text=text,
+            reply_markup=reply_markup
         )
     else:
         await update.message.reply_text(
-            text="Сегодня праздники у нескольких сотрудников.\nВыберите сотрудника, которого хотите поздравить:",
-            reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(employees)
+            text=text,
+            reply_markup=reply_markup
         )
 
 async def back_to_employees(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -227,7 +276,48 @@ async def finish_bot(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Чтобы начать заново, отправьте команду /start."
     )
 
+
+def send_daily_congratulations():
+    from database import get_employees_with_holidays, get_all_manager_chat_ids
+    import requests
+    import json
+
+    employees = get_employees_with_holidays()
+    if not employees:
+        return
+
+    chat_ids = get_all_manager_chat_ids()
+    if not chat_ids:
+        return
+
+    message = (
+            "📅 Сегодня праздники у сотрудников:\n" +
+            "\n".join(f"• {emp['full_name']}" for emp in employees) +
+            "\n\nНажмите /start, чтобы поздравить!"
+    )
+
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+
+    for chat_id in chat_ids:
+        try:
+            requests.post(url, json={
+                "chat_id": chat_id,
+                "text": message
+            })
+        except Exception as e:
+            print(f"Ошибка отправки менеджеру {chat_id}: {e}")
+
 def main():
+    scheduler = BackgroundScheduler(timezone="Europe/Moscow")
+    scheduler.add_job(
+        send_daily_congratulations,
+        trigger="cron",
+        hour=9,
+        minute=0
+    )
+    scheduler.start()
+
     app = Application.builder().token(TOKEN).build()
 
     conv_handler = ConversationHandler(
@@ -237,6 +327,7 @@ def main():
             PASSWORD: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_password)],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
+        allow_reentry=True
     )
 
     app.add_handler(CommandHandler("start", start))
@@ -252,9 +343,11 @@ def main():
     app.add_handler(CallbackQueryHandler(finish_bot, pattern=r"^finish_bot"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_edit_text))
 
-
     print("Бот запущен!")
-    app.run_polling()
+    try:
+        app.run_polling()
+    except KeyboardInterrupt:
+        scheduler.shutdown()
 
 if __name__ == '__main__':
     main()

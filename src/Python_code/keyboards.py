@@ -1,7 +1,7 @@
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 class KeyboardManager:
-    REGISTER = "Зарегистрироваться"
+    REGISTER = "ВОЙТИ"
 
     @staticmethod
     def get_register_button():
@@ -54,3 +54,8 @@ class KeyboardManager:
             [InlineKeyboardButton("Закончить работу", callback_data="finish_bot")]
         ]
         return InlineKeyboardMarkup(buttons)
+
+    @staticmethod
+    def get_finish_button():
+        button = InlineKeyboardButton("Закончить работу", callback_data="finish_bot")
+        return InlineKeyboardMarkup([[button]])
