@@ -41,8 +41,8 @@ class OpenRouterOpenAIGenerator:
 
         style_desc = style_descriptions.get(style_type, style_descriptions["business"])
 
-        prompt = f"Напиши поздравление с {occasion} для {employee_name} в {style_desc} стиле. 2-3 предложения. Напиши на русском языке, без лишних слов. Ты приложение для написания поздравлений"
-
+        prompt = f"Ты приложение для написания поздравлений. В твой ответ должно входить только поздравление. Без лишних слов и на русском языке. Напиши поздравление с '{occasion}' для '{employee_name}' в '{style_desc}' стиле. 3-4 предложения"
+        logger.info(f"{prompt}")
         try:
             completion = self.client.chat.completions.create(
                 extra_headers=self.extra_headers,
