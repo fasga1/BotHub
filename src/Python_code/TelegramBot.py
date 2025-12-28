@@ -20,10 +20,16 @@ from database import (
 )
 from apscheduler.schedulers.background import BackgroundScheduler
 import threading
-load_dotenv()
 
+load_dotenv()
+from ai_generator import create_openrouter_generator
+
+import logging
+logger = logging.getLogger(__name__)
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+
+ai_generator = create_openrouter_generator()
 
 async def start(update, context):
     reply_markup = KeyboardManager.get_register_button()
@@ -167,6 +173,7 @@ async def cancel(update, context):
     await update.message.reply_text("Регистрация отменена.")
     return ConversationHandler.END
 
+
 async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
@@ -179,27 +186,44 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     style_type = parts[1]
     employee_name = parts[2]
 
-    if style_type == "official":
-        message = (
-            f"Уважаемый(ая) {employee_name}!\n\n"
-            "От имени коллектива примите наши искренние поздравления!\n"
-            "Желаем крепкого здоровья, профессиональных успехов и благополучия!"
-        )
-    elif style_type == "business":
-        message = (
-            f"{employee_name},\n\n"
-            "Поздравляем с профессиональным достижением!\n"
-            "Ваш вклад в развитие компании высоко ценится. "
-            "Успехов в реализации новых проектов!"
-        )
-    elif style_type == "friendly":
-        message = (
-            f"Привет, {employee_name}! 🎉\n\n"
-            "С днём рождения! Желаем море позитива, "
-            "крутых идей и чтобы все задачи решались сами! 😎"
-        )
+    ai_message = None
+    if ai_generator:
+        try:
+            ai_message = ai_generator.generate_congratulation(
+                employee_name=employee_name,
+                style_type=style_type,
+                occasion="день рождения"  # Можно сделать динамическим если нужно
+            )
+        except Exception as e:
+            logger.error(f"Ошибка генерации AI: {e}")
+
+    if ai_message:
+        message = ai_message
+        logger.info(f"Использован AI-текст для {employee_name}")
     else:
-        message = "Неизвестный стиль."
+        # Fallback на статические шаблоны
+        logger.info(f"Использован шаблонный текст для {employee_name}")
+        if style_type == "official":
+            message = (
+                f"Уважаемый(ая) {employee_name}!\n\n"
+                "От имени коллектива примите наши искренние поздравления!\n"
+                "Желаем крепкого здоровья, профессиональных успехов и благополучия!"
+            )
+        elif style_type == "business":
+            message = (
+                f"{employee_name},\n\n"
+                "Поздравляем с профессиональным достижением!\n"
+                "Ваш вклад в развитие компании высоко ценится. "
+                "Успехов в реализации новых проектов!"
+            )
+        elif style_type == "friendly":
+            message = (
+                f"Привет, {employee_name}! 🎉\n\n"
+                "С днём рождения! Желаем море позитива, "
+                "крутых идей и чтобы все задачи решались сами! 😎"
+            )
+        else:
+            message = "Неизвестный стиль."
 
     await query.edit_message_text(
         text=message,
