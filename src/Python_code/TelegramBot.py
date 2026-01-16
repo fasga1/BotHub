@@ -192,7 +192,7 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ai_message = ai_generator.generate_congratulation(
                 employee_name=employee_name,
                 style_type=style_type,
-                occasion="день рождения"  # Можно сделать динамическим если нужно
+                occasion="день рождения"
             )
         except Exception as e:
             logger.error(f"Ошибка генерации AI: {e}")
@@ -200,8 +200,8 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if ai_message:
         message = ai_message
         logger.info(f"Использован AI-текст для {employee_name}")
+
     else:
-        # Fallback на статические шаблоны
         logger.info(f"Использован шаблонный текст для {employee_name}")
         if style_type == "official":
             message = (
@@ -212,7 +212,7 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif style_type == "business":
             message = (
                 f"{employee_name},\n\n"
-                "Поздравляем с профессиональным достижением!\n"
+                "Поздравляем вас!\n"
                 "Ваш вклад в развитие компании высоко ценится. "
                 "Успехов в реализации новых проектов!"
             )
@@ -220,7 +220,7 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
             message = (
                 f"Привет, {employee_name}! 🎉\n\n"
                 "С днём рождения! Желаем море позитива, "
-                "крутых идей и чтобы все задачи решались сами! 😎"
+                "крутых идей и чтобы все задачи решались сами!"
             )
         else:
             message = "Неизвестный стиль."

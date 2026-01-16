@@ -7,13 +7,6 @@ def main():
 
     generator = create_openrouter_generator(use_openai_lib=True)
 
-    if not generator:
-        print("\n❌ Не удалось создать генератор. Проверьте:")
-        print("   1. Файл .env в той же папке")
-        print("   2. Содержимое .env: OPENROUTER_API_KEY=ваш_ключ")
-        print("   3. Получите ключ на: https://openrouter.ai/keys")
-        exit(1)
-
     test_cases = [
         ("Анна", "friendly", "день рождения"),
         ("Иван Петрович", "official", "юбилей работы"),
@@ -22,7 +15,6 @@ def main():
 
     print(f"\n🔗 Подключение установлено. Ключ: {generator.api_key[:10]}...")
     print(f"🌐 Сайт: {generator.site_url}")
-    print(f"🤖 Используемая модель: tngtech/deepseek-r1t-chimera:free")
     print(f"📊 Тестируем {len(test_cases)} сценариев:\n")
 
     successful = 0

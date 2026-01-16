@@ -46,7 +46,7 @@ class OpenRouterOpenAIGenerator:
         try:
             completion = self.client.chat.completions.create(
                 extra_headers=self.extra_headers,
-                model="tngtech/deepseek-r1t-chimera:free",
+                model="xiaomi/mimo-v2-flash:free",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.5,
                 max_tokens=150
@@ -62,7 +62,7 @@ class OpenRouterOpenAIGenerator:
         try:
             self.client.chat.completions.create(
                 extra_headers=self.extra_headers,
-                model="tngtech/deepseek-r1t-chimera:free",
+                model="xiaomi/mimo-v2-flash:free",
                 messages=[{"role": "user", "content": "Привет"}],
                 max_tokens=5,
                 temperature=0.1
