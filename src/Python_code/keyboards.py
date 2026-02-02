@@ -35,7 +35,8 @@ class KeyboardManager:
         buttons = [
             [InlineKeyboardButton("Понравилось", callback_data=f"feedback_like_{employee_name}")],
             [InlineKeyboardButton("Внести правки", callback_data=f"feedback_edit_{employee_name}")],
-            [InlineKeyboardButton("Полностью переписать", callback_data=f"feedback_rewrite_{employee_name}")]
+            [InlineKeyboardButton("Полностью переписать", callback_data=f"feedback_regenerate_{employee_name}")],
+            [InlineKeyboardButton("Выбрать другой стиль", callback_data=f"feedback_rewrite_{employee_name}")]
         ]
         return InlineKeyboardMarkup(buttons)
 

@@ -35,10 +35,11 @@ async def start(update, context):
     reply_markup = KeyboardManager.get_register_button()
     await update.message.reply_text(
         "Привет!\nВы запустили WB_Congratulations_bot\n\n"
-        "Вот инструкция по пользованию ботом для вас:\n\n"
-        "Первым делом, для работы в боте вам необходимо зарегистрироваться, "
-        "используя вашу корпоративную почту и выданный вам пароль. "
-        "Для этого нажмите на кнопку 'Зарегистрироваться'",
+        "Вот краткая инструкция по моей работе:\n"
+        "1. Зарегистрируйтесь, используя корпоративную почту "
+        "2. Выберите сотрудника, которого хотите поздравить "
+        "3. Выберите стиль, в котором хотите сгенерировать поздравление "
+        "4. Внесите коррективы или скопируйте сообщение для именинника ",
         reply_markup=reply_markup
     )
     return None
@@ -104,7 +105,7 @@ async def get_password(update, context):
             return ConversationHandler.END
 
         await update.message.reply_text(
-            "Доступ открыт!\nСегодня праздники у следующих сотрудников:",
+            "Сегодня праздник у следующих сотрудников:",
             reply_markup=KeyboardManager.get_employee_inline_keyboard_with_finish(
                 [emp['full_name'] for emp in employees]
             )
@@ -185,6 +186,8 @@ async def style_selected(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     style_type = parts[1]
     employee_name = parts[2]
+    context.user_data['current_style'] = style_type
+    context.user_data['current_employee'] = employee_name
 
     ai_message = None
     if ai_generator:
@@ -254,11 +257,64 @@ async def feedback_edit_start(update: Update, context: ContextTypes.DEFAULT_TYPE
     await query.answer()
     employee_name = query.data.split("_", 2)[2]
 
-    context.user_data['awaiting_edit'] = True
+    context.user_data['awaiting_feedback'] = True
     context.user_data['current_employee'] = employee_name
 
     await query.edit_message_text(
-        "Пожалуйста, введите вашу версию поздравления:"
+        "Напишите, как вы хотите изменить поздравление:\n\n"
+        "Примеры:\n• Сделай короче\n• Добавь юмора\n• Упомяни проект Alpha"
+    )
+
+
+async def feedback_regenerate(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    parts = query.data.split("_", 2)
+    if len(parts) < 3:
+        await query.edit_message_text("Ошибка при перегенерации.")
+        return
+
+    employee_name = parts[2]
+    style_type = context.user_data.get('current_style', 'friendly')
+
+    ai_message = None
+    if ai_generator:
+        try:
+            ai_message = ai_generator.generate_congratulation(
+                employee_name=employee_name,
+                style_type=style_type,
+                occasion="день рождения"
+            )
+        except Exception as e:
+            logger.error(f"Ошибка генерации AI при перезапуске: {e}")
+
+    if ai_message:
+        message = ai_message
+    else:
+        if style_type == "official":
+            message = (
+                f"Уважаемый(ая) {employee_name}!\n\n"
+                "От имени коллектива примите наши искренние поздравления!\n"
+                "Желаем крепкого здоровья, профессиональных успехов и благополучия!"
+            )
+        elif style_type == "business":
+            message = (
+                f"{employee_name},\n\n"
+                "Поздравляем вас!\n"
+                "Ваш вклад в развитие компании высоко ценится. "
+                "Успехов в реализации новых проектов!"
+            )
+        else:
+            message = (
+                f"Привет, {employee_name}! 🎉\n\n"
+                "С днём рождения! Желаем море позитива, "
+                "крутых идей и чтобы все задачи решались сами!"
+            )
+
+    await query.edit_message_text(
+        text=message,
+        reply_markup=KeyboardManager.get_feedback_inline_keyboard(employee_name)
     )
 
 async def like_yes(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -275,16 +331,33 @@ async def like_no(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def handle_edit_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if context.user_data.get('awaiting_edit'):
-        edited_text = update.message.text.strip()
+    if context.user_data.get('awaiting_feedback'):
+        feedback_text = update.message.text.strip()
         employee_name = context.user_data.get('current_employee', 'сотрудник')
+        style_type = context.user_data.get('current_style', 'friendly')
 
-        context.user_data['awaiting_edit'] = False
+        context.user_data['awaiting_feedback'] = False
+
+        ai_message = None
+        if ai_generator:
+            try:
+                ai_message = ai_generator.generate_congratulation(
+                    employee_name=employee_name,
+                    style_type=style_type,
+                    occasion="день рождения",
+                    feedback=feedback_text
+                )
+            except Exception as e:
+                logger.error(f"Ошибка генерации с фидбэком: {e}")
+
+        if ai_message:
+            message = ai_message
+        else:
+            message = f"Ваш вариант поздравления для {employee_name}:\n\n{feedback_text}"
 
         await update.message.reply_text(
-            f"Ваше поздравление для {employee_name}:\n\n{edited_text}\n\n"
-            "Отправлено! Спасибо за правки!",
-            reply_markup=KeyboardManager.get_post_edit_keyboard()  # ← новая клавиатура
+            message,
+            reply_markup=KeyboardManager.get_feedback_inline_keyboard(employee_name)
         )
         return
 
@@ -315,7 +388,7 @@ def send_daily_congratulations():
         return
 
     message = (
-            "📅 Сегодня праздники у сотрудников:\n" +
+            "📅 Сегодня праздник у сотрудников:\n" +
             "\n".join(f"• {emp['full_name']}" for emp in employees) +
             "\n\nНажмите /start, чтобы поздравить!"
     )
@@ -366,6 +439,7 @@ def main():
     app.add_handler(CallbackQueryHandler(like_no, pattern=r"^like_no"))
     app.add_handler(CallbackQueryHandler(finish_bot, pattern=r"^finish_bot"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_edit_text))
+    app.add_handler(CallbackQueryHandler(feedback_regenerate, pattern=r"^feedback_regenerate_"))
 
     print("Бот запущен!")
     try:

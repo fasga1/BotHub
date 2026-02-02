@@ -30,7 +30,7 @@ class OpenRouterOpenAIGenerator:
             raise
 
     def generate_congratulation(self, employee_name: str, style_type: str,
-                                occasion: str = "день рождения") -> Optional[str]:
+                                occasion: str = "день рождения", feedback: str = None) -> Optional[str]:
         from openai import OpenAIError
 
         style_descriptions = {
@@ -41,8 +41,22 @@ class OpenRouterOpenAIGenerator:
 
         style_desc = style_descriptions.get(style_type, style_descriptions["business"])
 
-        prompt = f"Ты приложение для написания поздравлений. В твой ответ должно входить только поздравление. Без лишних слов и на русском языке. Напиши поздравление с '{occasion}' для '{employee_name}' в '{style_desc}' стиле. 3-4 предложения"
-        logger.info(f"{prompt}")
+        if feedback:
+            prompt = (
+                f"Ты приложение для написания поздравлений. В твой ответ должно входить только поздравление. "
+                f"Без лишних слов и на русском языке.\n\n"
+                f"Исходное поздравление было сгенерировано для '{employee_name}' по поводу '{occasion}' в стиле '{style_desc}'.\n"
+                f"Пользователь просит: \"{feedback}\"\n\n"
+                f"Напиши обновлённое поздравление, учтя эту правку. 3-4 предложения."
+            )
+        else:
+            prompt = (
+                f"Ты приложение для написания поздравлений. В твой ответ должно входить только поздравление. "
+                f"Без лишних слов и на русском языке. "
+                f"Напиши поздравление с '{occasion}' для '{employee_name}' в '{style_desc}' стиле. 3-4 предложения"
+            )
+
+        logger.info(f"Промпт для ИИ:\n{prompt}")
         try:
             completion = self.client.chat.completions.create(
                 extra_headers=self.extra_headers,
